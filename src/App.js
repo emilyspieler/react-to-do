@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import ToDo from './components/ToDo.jsx';
+import ToDo from './components/ToDo.js';
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ var newItems = this.state.items.filter((_item) => {
  this.setState({ items: newItems});
 }
 
-   handleChanges(e) {
+   handleChange(e) {
     this.setState({ newTodoDescription: e.target.value })
   }
 
@@ -46,6 +46,8 @@ handleSubmit(e) {
     todo.isCompleted = todo.isCompleted ? false : true;
     this.setState({ todos: todos });
   }
+
+
 
      render() {
           return (

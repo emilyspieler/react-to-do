@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 
 class ToDo extends Component {
   render () {
-    return  <ul>
-        <li>
+    return
+         { this.state.todos.map((item, i) => {
+        return <li key={item}>
+            { item }
          <input type="checkbox" checked={ this.props.isCompleted } onChange ={ this.props.toggleComplete } />
-         <a href='#' onClick={this.props.handleDelete}>[x]
-</a>
          <span>{this.props.description}</span>
+         <a href='#' onClick={this.props.handleDelete}>[x]</a>
        </li>
-     </ul>;
+     });
    }
  }
 
