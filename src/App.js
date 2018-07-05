@@ -1,6 +1,7 @@
+
 import React, { Component } from 'react';
 import './App.css';
-import ToDo from './components/ToDo.js';
+import ToDo from './components/ToDo.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -15,23 +16,36 @@ class App extends Component {
      };
    }
 
-   handleChange(e) {
+handleDelete (itemToBeDeleted) {
+var newItems = this.state.items.filter((_item) => {
+  return _item !== itemToBeDeleted
+});
+ this.setState({ items: newItems});
+}
+
+   handleChanges(e) {
     this.setState({ newTodoDescription: e.target.value })
   }
 
-   handleSubmit(e) {
-     e.preventDefault();
-     if (!this.state.newTodoDescription) { return }
-     const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
-     this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
-   }
+  handleChange (event) {
+    var text = event.target.value;
+    console.log(text);
+    this.setState({ text: text });
+  }
 
-   toggleComplete(index) {
-       const todos = this.state.todos.slice();
-       const todo = todos[index];
-       todo.isCompleted = todo.isCompleted ? false : true;
-       this.setState({ todos: todos });
-     }
+handleSubmit(e) {
+  e.preventDefault();
+  if (!this.state.newTodoDescription) { return }
+  const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
+  this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
+  }
+
+  toggleComplete(index) {
+    const todos = this.state.todos.slice();
+    const todo = todos[index];
+    todo.isCompleted = todo.isCompleted ? false : true;
+    this.setState({ todos: todos });
+  }
 
      render() {
           return (
@@ -45,6 +59,10 @@ class App extends Component {
                 <input type="text" value={ this.state.newTodoDescription } onChange={ (e) => this.handleChange(e) } />
                 <input type="submit" />
               </form>
+
+              <ToDo
+              handleDelete={this.handleDelete.bind(this)}
+              items={this.state.items} />
             </div>
           );
         }
@@ -52,4 +70,5 @@ class App extends Component {
 
 export default App;
 
-// React to-do part III
+
+// React to-do part Event Handlers
