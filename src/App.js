@@ -37,7 +37,7 @@ handleSubmit(e) {
 
   deleteTodo(id) {
    this.setState((prevState) => ({
-       todos: prevState.todos.filter(item => item.id !== id),
+       todos: prevState.todos.filter(item => item !== id),
    }))
 };
 
@@ -51,7 +51,7 @@ createTasks(item) {
             <div className="App">
               <ul>
                 { this.state.todos.map( (todo, index) =>
-                  <ToDo key={index} description={todo.description} isCompleted={todo.isCompleted} toggleComplete={ () => this.toggleComplete(index) } onDelete={ this.deleteTodo }/>
+                  <ToDo key={index} description={todo.description} isCompleted={todo.isCompleted} toggleComplete={ () => this.toggleComplete(index) } onDelete={ () => this.deleteTodo(todo) }/>
                 )}
               </ul>
               <form onSubmit={ (e) => this.handleSubmit(e) }>
@@ -66,4 +66,4 @@ createTasks(item) {
 export default App;
 
 
-// React to-do part Event Handlers
+// React to-do part Event Handler
